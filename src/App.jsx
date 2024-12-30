@@ -269,6 +269,7 @@ function App() {
 
   return (
     <AppContainer>
+      <div className="header-area" style={{ backgroundColor: 'rgb(238, 240, 242)' }} />
       <Navbar 
         currentSlide={currentVerticalIndex} 
         slideColor={getCurrentSlideColor()}

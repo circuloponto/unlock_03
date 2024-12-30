@@ -65,6 +65,16 @@
   top: calc(var(--cell-size) * 3);
 }
 
+.header-area {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(var(--cell-size) * 3); /* This covers from top to bottom of menu */
+  background-color:rgb(238 240 242);;
+  z-index: 999; /* Just below the menu but above slides */
+}
+
 .menuItemsContainer {
   display: flex;
   flex-direction: row;
@@ -80,7 +90,8 @@
   width: calc(var(--cell-size)* 15);
   height: calc(var(--cell-size)* 1);
   border: 1px solid hsla(0, 0%, 81%, 0.454);
-  background-color: #eae4e0;
+  background-color: #eae4e069;
+  z-index: 1000;
 }
 
 .menuitemsInner {
