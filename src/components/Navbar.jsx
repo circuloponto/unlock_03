@@ -94,7 +94,7 @@ const Navbar = ({
                                     {t(`menu.${item.key}`)}
                                 </div>
                             ))}
-                            <LanguagePicker />
+                           
                         </div>
                     </div>
 

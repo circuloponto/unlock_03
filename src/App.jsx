@@ -21,7 +21,7 @@ import { useTranslation } from 'react-i18next';
 
 const AppContainer = styled.div`
   width: 100vw;
-  height: 300vh;
+  height: 100vh;
   position: relative;
   background: rgb(0 0 0 / 5%);
   overflow-y: visible;
@@ -392,7 +392,16 @@ function App() {
 
   return (
     <AppContainer>
-      <div className="header-area" style={{ backgroundColor: 'rgb(238, 240, 242)' }} />
+      <div style={{ 
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: 'rgb(238, 240, 242)',
+        zIndex: 1190,
+        height: 'calc(var(--cell-size) * 3)'
+      }} />
+      <LanguagePicker />
       <Navbar 
         onMenuToggle={handleMenuToggle}
         isMenuOpen={isMenuOpen}

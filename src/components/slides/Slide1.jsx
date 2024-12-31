@@ -11,7 +11,7 @@ const Slide1Section = styled(BaseSlideSection)`
   align-items: flex-start;
   justify-content: center;
   padding-top: calc(var(--cell-size) * 4);
-  padding-bottom: calc(var(--cell-size) * 4);
+  padding-bottom: calc(var(--cell-size) * 3);
   padding-left: calc(var(--cell-size) * 3);
   padding-right: calc(var(--cell-size) * 3);
   box-sizing: border-box;
@@ -21,15 +21,18 @@ const Slide1Section = styled(BaseSlideSection)`
 const Slide1Text = styled(BaseSlideText)`
   width: calc(var(--cell-size) * 18);
   min-width: calc(var(--cell-size) * 18);
-  height: calc(100vh - calc(var(--cell-size) * 3) - 200px);
+  height: calc(100vh - calc(var(--cell-size) * 3) - 100px);
   display: flex;
   flex-direction: row;
   gap: calc(var(--cell-size) * 2);
   padding: calc(var(--cell-size) * 1);
   position: relative;
   background: #e6811e17;
+  color: #164266;
   border-left: 4px solid #e6821e;
-  border-right: 4px solid #e6821e;
+  box-shadow: inset 0px 3px 11px -1px rgb(72 72 72 / 31%), inset 0px -3px 11px -1px rgb(72 72 72 / 31%);
+}
+ 
   
   @media (max-width: 645px) {
     flex-direction: column;
@@ -43,9 +46,9 @@ const Slide1Text = styled(BaseSlideText)`
   h3 {
     text-indent: 30px;
     text-align: justify;
-    font-size: clamp(4px, 1vw + 0.6rem, 16px);
+    font-size: clamp(4px, 1vw + 0.4rem, 16px);
     line-height: 1.5;
-    color: #616379;
+    color:#164266;
     font-weight: 360;
     margin: 0;
     width: calc(var(--cell-size) * 8);

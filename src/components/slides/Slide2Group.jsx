@@ -19,7 +19,7 @@ const Slide2Section = styled(BaseSlideSection)`
 const Slide2Text = styled(BaseSlideText)`
   width: calc(var(--cell-size) * 18);
   min-width: calc(var(--cell-size) * 18);
-  height: calc(100vh - calc(var(--cell-size) * 4) - 200px);
+  height: calc(100vh - calc(var(--cell-size) * 3) - 100px);
   display: block;
   background: #e6811e17;
   display: flex;
@@ -29,6 +29,8 @@ const Slide2Text = styled(BaseSlideText)`
   justify-content: space-between;
   align-items: flex-start;
   position: relative;
+  box-shadow: inset 0px 3px 11px -1px rgb(72 72 72 / 31%), inset 0px -3px 11px -1px rgb(72 72 72 / 31%);
+}
   
   @media (max-width: 645px) {
     flex-direction: column;
@@ -44,7 +46,7 @@ const Slide2Text = styled(BaseSlideText)`
     text-align: justify;
     font-size: clamp(4px, 1vw + 0.6rem, 16px);
     line-height: 1.5;
-    color: #616379;
+    color:#164266;
     font-weight: 360;
     margin: 0;
     width:calc(var(--cell-size) * 8);
