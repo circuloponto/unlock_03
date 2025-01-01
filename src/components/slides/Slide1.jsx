@@ -1,7 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import BaseSlideSection, { SlideText as BaseSlideText } from './SlideSection';
+import BaseSlideSection from './SlideSection';
 import PDFDownload from '../PdfDownload';
 import { pdfFiles } from '../../config/pdfs';
 
@@ -66,15 +65,15 @@ const Slide1 = ({ getSlideColor }) => {
   const { t } = useTranslation();
 
   return (
-    <Slide1Section $bgColor={getSlideColor(0, 0)}>
-      <Slide1Text>
+    <BaseSlideSection $bgColor={getSlideColor(0, 0)} className="slide1-section">
+      <div className="slide1-text">
         <h3><span>Unlock</span> {t('slides.slide1.paragraph1')}</h3>
         <h3>{t('slides.slide1.paragraph2')}</h3>
         {pdfFiles.project.map(pdf => (
           <PDFDownload key={pdf.id} pdf={pdf} />
         ))}
-      </Slide1Text>
-    </Slide1Section>
+      </div>
+    </BaseSlideSection>
   );
 };
 

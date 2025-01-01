@@ -1,89 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import LanguagePicker from './LanguagePicker';
-
-const NavigationGrid = styled.div`
-  position: fixed;
-  bottom: 55px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: grid;
-  grid-template-columns: 55px 100px 100px 55px;
-  grid-template-rows: 20px;
-  gap: 10px;
-  align-items: center;
-  z-index: 1190;
-  justify-items: center;
-  opacity: ${props => props.$menuOpen ? '0' : '1'};
-  pointer-events: ${props => props.$menuOpen ? 'none' : 'auto'};
-  transition: opacity 0.3s ease;
-
-  @media (max-width: 500px) {
-    bottom: 18px;
-    left: 50%;
-    grid-template-columns: 55px 70px 70px 55px;
-    grid-template-rows: 20px;
-    transform: translateX(-50%);
-  }
-`;
-
-const NavigationButton = styled(motion.button)`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: none;
-  background: rgb(171 168 168 / 10%);
-  box-shadow: 0 2px 0 2px rgb(0 0 0 / 10%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 20px;
-  backdrop-filter: blur(10px);
-  color: white;
-  
-  &:hover {
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-  &:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    &:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-  }
-
-  @media (max-width: 500px) {
-    width: 30px;
-    height: 30px;
-  }
-`;
-//color: ${props => props.$isActive ? props.$color : 'white'};
-const StyledIcon = styled.div`
-  color: ${'white'};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  
-  @media (max-width: 500px) {
-    font-size: 17px;
-  }
-`;
-
-const CenterSpace = styled.div`
-  width: 100%;
-  height: 100%;
-  grid-column: 2/span 2;
-  grid-row: 1;
-  @media (max-width: 500px) {
-    width: 20px;
-    height: 20px;
-  }
-`;
 
 const DiamondIndicator = ({ 
   currentVerticalIndex, 
@@ -158,44 +76,40 @@ const DiamondIndicator = ({
   const constraints = getCurrentConstraints();
 
   return (
-    <NavigationGrid $menuOpen={isMenuOpen}>
+    <div className={`navigation-grid ${isMenuOpen ? 'menu-open' : ''}`}>
       {/* Left button */}
       <div style={{ gridColumn: 1, gridRow: 1 }}>
-        <NavigationButton
+        <motion.button
+          className={`navigation-button ${!constraints.left ? 'disabled' : ''}`}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => handleClick('left')}
           disabled={!constraints.left}
         >
-          <StyledIcon 
-            $isActive={constraints.left}
-            $color={constraints.left ? getNextSlideColor('left') : 'white'}
-          >
+          <div className="navigation-icon">
             <FaChevronLeft className="arrow arrow-left"/>
-          </StyledIcon>
-        </NavigationButton>
+          </div>
+        </motion.button>
       </div>
 
       {/* Center space for breadcrumbs */}
-      <CenterSpace />
+      <div className="center-space" />
 
       {/* Right button */}
       <div style={{ gridColumn: 4, gridRow: 1 }}>
-        <NavigationButton
+        <motion.button
+          className={`navigation-button ${!constraints.right ? 'disabled' : ''}`}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => handleClick('right')}
           disabled={!constraints.right}
         >
-          <StyledIcon 
-            $isActive={constraints.right}
-            $color={constraints.right ? getNextSlideColor('right') : 'white'}
-          >
+          <div className="navigation-icon">
             <FaChevronRight className="arrow arrow-right"/>
-          </StyledIcon>
-        </NavigationButton>
+          </div>
+        </motion.button>
       </div>
-    </NavigationGrid>
+    </div>
   );
 };
 
