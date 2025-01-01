@@ -20,7 +20,10 @@ const Slide1Text = styled(BaseSlideText)`
   min-width: calc(var(--cell-size) * 18);
   height: calc(100vh - calc(var(--cell-size) * 3) - 100px);
   display: flex;
+  
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   gap: 40px;
  
   padding: calc(var(--cell-size) * 1);
@@ -75,17 +78,48 @@ const SpanLock = styled.span`
 `;
 const RowContainer = styled.div`
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 80px;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  height: 300px;
   font-size: 14px;
+  width: calc(var(--cell-size) * 16);
+  
+  
+
+`;
+const VerticalLine = styled.div`
+  width: 1px;
+  height: 300px;
+  position:absolute;
+  left: calc(var(--cell-size) * 9);
+  top: calc(var(--cell-size) * 3);
+  background-color: rgba(255, 255, 255, 0.4);
+  
+
+`;
+const RowMenuItems = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: calc(var(--cell-size) * 16);
+  height: 20px;
+  font-size: 14px;
+  margin:-100px 0 0 0;
 
 `;
 const MenuItem = styled.div`
 height: 40px;
-width: 100px;
+width: 200px;
 font-size: 16px;
 font-weight: 500;
+
+color: #164266;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
 
 `;
 
@@ -95,22 +129,36 @@ const Partners = styled.div`
 `;
 
 const PartnerCard = styled.div`
- width: 200px;
-  height: 250px;
+ width: calc(var(--cell-size) * 10);
+ height: 300px;
+  
+`;
+const CardItems = styled.div`
+ 
+height: 40px;
+ background: rgba(255, 255, 255, 0.0);
+ margin: 5px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ text-align: center !important;
+  
 `;
 
 const Disclaimer = styled.div`
  
-  font-size: 10px;
+  font-size: 6px;
   line-height: 2;
   text-align: justify;
   opacity: 0.7;
+  align-self: flex-start;
 `;
 
 const Footer = styled.div`
-  margin-top: calc(var(--cell-size) * 1);
-  font-size: 0.7em;
+  
+  font-size: 10px;
   opacity: 0.5;
+  align-self: flex-start;
 `;
 
 export const Slide6 = ({ getSlideColor }) => {
@@ -125,33 +173,34 @@ export const Slide6 = ({ getSlideColor }) => {
     
     <RowContainer>
      
-    <div>
-
-        <MenuItem>{t('slides.slide6.menuTitles.project')}</MenuItem>
-        <MenuItem>{t('slides.slide6.menuTitles.targetGroups')}</MenuItem>
-        <MenuItem>{t('slides.slide6.menuTitles.activities')}</MenuItem>
-        <MenuItem>{t('slides.slide6.menuTitles.partners')}</MenuItem>
-        <MenuItem>{t('slides.slide6.menuTitles.results')}</MenuItem>
-        <MenuItem>{t('slides.slide6.menuTitles.contacts')}</MenuItem>
-    </div>
    
         <PartnerCard>
-          <h4>{t('slides.slide6.partners.partner1.name')}</h4>
-          <p>{t('slides.slide6.partners.partner1.address')}</p>
-          <p>{t('slides.slide6.partners.partner1.phone')}</p>
-          <p>{t('slides.slide6.partners.partner1.mobile')}</p>
-          <p>{t('slides.slide6.partners.partner1.email')}</p>
+          <CardItems>{t('slides.slide6.partners.partner1.name')}</CardItems>
+          <CardItems>{t('slides.slide6.partners.partner1.address')}</CardItems>
+          <CardItems>{t('slides.slide6.partners.partner1.phone')}</CardItems>
+          <CardItems>{t('slides.slide6.partners.partner1.mobile')}</CardItems>
+          <CardItems>{t('slides.slide6.partners.partner1.email')}</CardItems>
         </PartnerCard>
+        <VerticalLine/>
         <PartnerCard>
-          <h4>{t('slides.slide6.partners.partner2.name')}</h4>
-          <p>{t('slides.slide6.partners.partner2.address')}</p>
-          <p>{t('slides.slide6.partners.partner2.phone')}</p>
-          <p>{t('slides.slide6.partners.partner2.mobile')}</p>
-          <p>{t('slides.slide6.partners.partner2.email')}</p>
+          <CardItems>{t('slides.slide6.partners.partner2.name')}</CardItems>
+          <CardItems>{t('slides.slide6.partners.partner2.address')}</CardItems>
+          <CardItems>{t('slides.slide6.partners.partner2.phone')}</CardItems>
+          <CardItems>{t('slides.slide6.partners.partner2.mobile')}</CardItems>
+          <CardItems>{t('slides.slide6.partners.partner2.email')}</CardItems>
         </PartnerCard>
      
     </RowContainer>
       
+    <RowMenuItems>
+
+        <MenuItem>{t('slides.slide6.menuTitles.project')}</MenuItem>
+        <MenuItem style={{width: '300px'}}>{t('slides.slide6.menuTitles.targetGroups')}</MenuItem>
+        <MenuItem>{t('slides.slide6.menuTitles.activities')}</MenuItem>
+        <MenuItem>{t('slides.slide6.menuTitles.partners')}</MenuItem>
+        <MenuItem>{t('slides.slide6.menuTitles.results')}</MenuItem>
+        <MenuItem>{t('slides.slide6.menuTitles.contacts')}</MenuItem>
+    </RowMenuItems>
    
 
    
