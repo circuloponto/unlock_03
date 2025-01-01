@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
 import Slider from './components/Slider';
 import ProgressBar from './components/ProgressBar';
 import DiamondIndicator from './components/DiamondIndicator';
 import Navbar from './components/Navbar';
 import Grid from './components/Grid';
 import LanguagePicker from './components/LanguagePicker';
+import Breadcrumb from './components/Breadcrumb';
 import {
   Slide1,
   Slide2Group,
@@ -19,70 +19,8 @@ import './App.css';
 import './i18n';
 import { useTranslation } from 'react-i18next';
 
-const AppContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  background: rgb(0 0 0 / 5%);
-  overflow-y: visible;
- 
-`;
-
-const Content = styled.div`
-  height: 300vh;
-  width: 100%;
-`;
-
-const BreadcrumbsNav = styled.nav`
-  position: fixed;
-  bottom: 50px;
-  height: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  z-index: 2001;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  opacity: ${props => props.$menuOpen ? '0' : '1'};
-  pointer-events: ${props => props.$menuOpen ? 'none' : 'auto'};
-  transition: opacity 0s ease;
-`;
-
-const HorizontalBreadcrumbs = styled.div`
-  display: flex;
-  gap: 12px;
-  align-items: center;
-`;
-
-const BreadcrumbButton = styled.button`
-  width: ${props => props.$isMain ? '16px' : '12px'};
-  height: ${props => props.$isMain ? '16px' : '12px'};
-  border-radius: 50%;
-  border: ${props => props.$isMain ? '2px' : '2px'} solid;
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  transition: transform 0.3s ease;
-  
-  &:hover {
-    transform: scale(1.2);
-  }
-`;
-
-const SlideSection = styled.section`
-  width: 100vw;
-  height: 100vh;
-  background-color: ${props => props.$bgColor || '#000'};
-  transition: background-color 0.5s ease;
-`;
-
 const getSlideColor = (vIndex, hIndex) => {
   switch(vIndex) {
-    //case 0: return '#75b1e1';
     case 0: return '#75b1e10a';
     case 1:
       switch(hIndex) {
@@ -98,14 +36,8 @@ const getSlideColor = (vIndex, hIndex) => {
         case 1: return '#75b1e10a';
         default: return '#4A90E2';
       }
-    case 4:
-      switch(hIndex) {
-        case 0: return '#75b1e10a';
-        default: return '#4A90E2';
-      }
-    case 5:
-      return '#75b1e10a';
-    default: return '#75b1e10a';
+    case 4: return '#75b1e10a';
+    default: return '#000';
   }
 };
 
@@ -160,6 +92,7 @@ const slides = [
 ];
 
 function App() {
+  console.log('App component rendering');
   const { t } = useTranslation();
   const [currentVerticalIndex, setCurrentVerticalIndex] = useState(0);
   const [currentHorizontalIndex, setCurrentHorizontalIndex] = useState(0);
@@ -383,7 +316,7 @@ function App() {
   };
 
   return (
-    <AppContainer>
+    <div className="app-container">
       <div style={{ 
         position: 'fixed',
         top: 0,
@@ -407,7 +340,7 @@ function App() {
      {/*  <div className="logo2">
         UN
       </div> */}
-      <Content>
+      <div className="app-content">
         <Slider
           ref={sliderRef}
           slides={slides}
@@ -417,7 +350,7 @@ function App() {
           setCurrentHorizontalIndex={setCurrentHorizontalIndex}
           isMenuOpen={isMenuOpen}
         />
-      </Content>
+      </div>
 
       <DiamondIndicator 
         onNavigate={handleIndicatorNavigation}
@@ -427,47 +360,44 @@ function App() {
         getSlideColor={getSlideColor}
       />
 
-      <BreadcrumbsNav className="breadcrumbs-custom" $menuOpen={isMenuOpen}>
+      <nav className={`breadcrumbs-nav ${isMenuOpen ? 'breadcrumbs-nav--hidden' : 'breadcrumbs-nav--visible'}`}>
         {slides.map((slide, vIndex) => (
           slide.horizontal && slide.horizontal.length > 1 ? (
-            <HorizontalBreadcrumbs key={vIndex}>
-              {slide.horizontal.map((_, hIndex) => (
-                <BreadcrumbButton
-                  key={`${vIndex}-${hIndex}`}
-                  $isMain={false}
-                  onClick={() => handleBreadcrumbClick(vIndex, hIndex)}
-                  style={{
-                    borderColor:currentVerticalIndex === vIndex && currentHorizontalIndex === hIndex
-                    ?'rgb(230, 129, 29)' : '#8080808c',
-                    background: currentVerticalIndex === vIndex && currentHorizontalIndex === hIndex
-                  ? 'rgb(230, 129, 29)'
-                  : 'transparent',
-                  boxShadow: currentVerticalIndex === vIndex && currentHorizontalIndex === hIndex
-                  ? `0px 0px 0px 2px rgba(255, 255, 255, 0.6)`
-                  : 'none'
+            <div key={vIndex} className="horizontal-breadcrumbs">
+              <button
+                className={`breadcrumb-button breadcrumb-button--sub ${currentVerticalIndex === vIndex && currentHorizontalIndex === 0 ? 'active' : ''}`}
+                /* style={{ borderColor: getBreadcrumbColor(vIndex, 0) }} */
+                onClick={() => {
+                  setCurrentVerticalIndex(vIndex);
+                  setCurrentHorizontalIndex(0);
+                }}
+              />
+              {slide.horizontal.slice(1).map((_, hIndex) => (
+                <button
+                  key={hIndex + 1}
+                  className={`breadcrumb-button breadcrumb-button--sub ${currentVerticalIndex === vIndex && currentHorizontalIndex === hIndex + 1 ? 'active' : ''}`}
+                
+                  onClick={() => {
+                    setCurrentVerticalIndex(vIndex);
+                    setCurrentHorizontalIndex(hIndex + 1);
                   }}
                 />
               ))}
-            </HorizontalBreadcrumbs>
+            </div>
           ) : (
-            <BreadcrumbButton
+            <button
               key={vIndex}
-              $isMain={true}
-              onClick={() => handleBreadcrumbClick(vIndex, 0)}
-              style={{
-                borderColor: currentVerticalIndex === vIndex ? 'rgb(230, 129, 29)' : '#8080808c',
-                background: currentVerticalIndex === vIndex
-                  ? 'rgb(230, 129, 29)'
-                  : 'transparent',
-                  boxShadow: currentVerticalIndex === vIndex
-                  ? `0px 0px 0px 2px rgba(255, 255, 255, 0.6)`
-                  : 'none'
+              className={`breadcrumb-button breadcrumb-button--main ${currentVerticalIndex === vIndex ? 'active' : ''}`}
+            /*   style={{ borderColor: getBreadcrumbColor(vIndex, 0) }} */
+              onClick={() => {
+                setCurrentVerticalIndex(vIndex);
+                setCurrentHorizontalIndex(0);
               }}
             />
           )
         ))}
-      </BreadcrumbsNav>
-    </AppContainer>
+      </nav>
+    </div>
   );
 }
 

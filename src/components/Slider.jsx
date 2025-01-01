@@ -10,6 +10,7 @@ const SliderComponent = forwardRef(({
   setCurrentHorizontalIndex,
   isMenuOpen
 }, ref) => {
+  console.log('Slider rendering with:', { currentVerticalIndex, currentHorizontalIndex });
   const [isScrolling, setIsScrolling] = useState(false);
   const [instantTarget, setInstantTarget] = useState(null);
   const touchStartY = useRef(0);
